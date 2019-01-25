@@ -1,0 +1,16 @@
+{
+  "name": "spoke-fly",
+  "version": "1.0.0",
+  "description": "A fly.io repository that proxies texter requests to lambda, admin requests to Heroku, and caches static assets",
+  "main": "index.js",
+  "repository": "https://github.com/politics-rewired/spoke-fly.git",
+  "author": "ben-pr-p <ben.paul.ryan.packer@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "fly server",
+    "fly": "fly"
+  },
+  "devDependencies": {
+    "@fly/fly": "^0.44.9"
+  }
+}
