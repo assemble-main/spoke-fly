@@ -1,0 +1,6 @@
+app: spoke-fly
+config:
+  adminBackend:
+    fromSecret: adminBackend
+  texterBackend:
+    fromSecret: texterBackend
