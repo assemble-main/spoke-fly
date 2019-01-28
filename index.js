@@ -2,7 +2,9 @@ import proxy from "@fly/fetch/proxy";
 
 const admin = {
   name: "admin",
-  test: request => request.referrer && request.referrer.includes("/admin"),
+  test: request =>
+    request.headers.get("referer") &&
+    request.headers.get("referer").includes("/admin"),
   respond: request =>
     proxy(request, `https://${app.config.adminBackend}`, {
       headers: {
@@ -16,7 +18,6 @@ const texter = {
   name: "texter",
   test: request => true,
   respond: request => {
-    console.log(app);
     return proxy(`https://${app.config.texterBackend}`, {
       headers: {
         host: app.config.texterBackend,
@@ -29,11 +30,10 @@ const texter = {
 const backends = [admin, texter];
 
 fly.http.respondWith(request => {
-  console.log(request);
   for (let backend of backends) {
     if (backend.test(request)) {
+      console.log(request.headers.get("referer"));
       console.log(`Using ${backend.name}`);
-      console.log(`Using app.config ${JSON.stringify(app.config)}`);
       return backend.respond(request);
     }
   }
