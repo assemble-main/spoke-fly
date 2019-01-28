@@ -6,13 +6,14 @@ const admin = {
     request.url.includes("/assets") ||
     (request.headers.get("referer") &&
       request.headers.get("referer").includes("/admin")),
-  respond: request =>
-    proxy(request, `https://${app.config.adminBackend}`, {
+  respond: request => {
+    return proxy(`https://${app.config.adminBackend}`, {
       headers: {
         host: app.config.adminBackend,
         "x-forwarded-host": request.headers.get("hostname")
       }
-    })
+    })(request);
+  }
 };
 
 const texter = {
