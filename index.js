@@ -33,6 +33,7 @@ fly.http.respondWith(request => {
   for (let backend of backends) {
     if (backend.test(request)) {
       console.log(`Using ${backend.name}`);
+      console.log(`Using app.config ${JSON.stringify(app.config)}`);
       return backend.respond(request);
     }
   }
