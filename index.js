@@ -1,11 +1,5 @@
 import proxy from "@fly/fetch/proxy";
 
-const bundle = {
-  name: "bundle",
-  test: request => request.url.includes("index.js"),
-  respond: request => new Response("static", { status: 200 })
-};
-
 const admin = {
   name: "admin",
   test: request => request.referrer && request.referrer.includes("/admin"),
@@ -32,7 +26,7 @@ const texter = {
   }
 };
 
-const backends = [bundle, admin, texter];
+const backends = [admin, texter];
 
 fly.http.respondWith(request => {
   console.log(request);
