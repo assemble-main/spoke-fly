@@ -3,7 +3,7 @@ import proxy from "@fly/fetch/proxy";
 const admin = {
   name: "admin",
   test: request =>
-    request.path.includes("/assets") ||
+    request.url.includes("/assets") ||
     (request.headers.get("referer") &&
       request.headers.get("referer").includes("/admin")),
   respond: request =>
