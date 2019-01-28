@@ -3,8 +3,9 @@ import proxy from "@fly/fetch/proxy";
 const admin = {
   name: "admin",
   test: request =>
-    request.headers.get("referer") &&
-    request.headers.get("referer").includes("/admin"),
+    request.path.includes("/assets") ||
+    (request.headers.get("referer") &&
+      request.headers.get("referer").includes("/admin")),
   respond: request =>
     proxy(request, `https://${app.config.adminBackend}`, {
       headers: {
