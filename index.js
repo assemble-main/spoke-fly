@@ -32,10 +32,15 @@ const texter = {
 };
 
 const backends = [admin, texter];
+const whitelistedIps = ['67.84.224.13']
 
-fly.http.respondWith(request => {
-  console.log(request.remoteAddr)
-  if (request.remoteAddr !== '192.168.1.224') 
+fly.http.respondWith(async request => {
+  console.log(request)
+  const response = await fetch("https://ipinfo.io")
+  const ip = (await response.json()).ip
+  console.log(ip)
+
+  if (!whitelistedIps.includes(ip)) 
     return new Response(
       `<html>
       <head>
