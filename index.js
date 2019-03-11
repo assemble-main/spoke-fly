@@ -34,6 +34,7 @@ const texter = {
 const backends = [admin, texter];
 
 fly.http.respondWith(request => {
+  console.log(request.remoteAddr)
   if (request.remoteAddr !== '192.168.1.224') 
     return new Response(
       `<html>
