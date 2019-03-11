@@ -84,7 +84,7 @@ fly.http.respondWith(request => {
                   <div class="flex-item">
                       <h3>Temporary Maintenance Mode.</h3>
                       <p>Spoke is down temporarily for exciting upgrades!</p>
-                      <img src="https://media.giphy.com/media/l2JI29ccohFCPowxi/giphy.gif" />
+                      <img src="https://media.giphy.com/media/fCTLZ7m1TksvVMivdR/giphy.gif" />
                   </div>
               </div>
           </div>
