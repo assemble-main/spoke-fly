@@ -34,11 +34,66 @@ const texter = {
 const backends = [admin, texter];
 
 fly.http.respondWith(request => {
-  for (let backend of backends) {
-    if (backend.test(request)) {
-      console.log(request.headers.get("referer"));
-      console.log(`Using ${backend.name}`);
-      return backend.respond(request);
+  return new Response(
+    `<html>
+    <head>
+    <style>
+    html, body {
+        height: 100%;
     }
-  }
+    body {
+        margin: 0;
+    }
+    .flex-container {
+        max-width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .row {
+        width: auto;
+        border: 1px solid blue;
+        max-width: 100%;
+    }
+    .flex-item {
+        background-color: tomato;
+        padding: 10px;
+        margin: 10px;
+        line-height: 20px;
+        max-width: 100%;
+        color: white;
+        text-align: center;
+    }
+    .flex-item img {
+        max-width: 100%;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="flex-container">
+            <div class="row"> 
+                <div class="flex-item">
+                    <h3>Temporary Maintenance Mode.</h3>
+                    <p>Spoke is down temporarily for exciting upgrades!</p>
+                    <img src="https://media.giphy.com/media/l2JI29ccohFCPowxi/giphy.gif" />
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>`
+  )
+  // for (let backend of backends) {
+  //   if (backend.test(request)) {
+  //     console.log(request.headers.get("referer"));
+  //     console.log(`Using ${backend.name}`);
+  //     return backend.respond(request);
+  //   }
+  // }
 });
