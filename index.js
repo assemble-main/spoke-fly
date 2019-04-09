@@ -3,11 +3,11 @@ import proxy from "@fly/fetch/proxy";
 const admin = {
   name: "admin",
   test: request =>
-    // request.url.includes("/autoassign") ||
+    request.url.includes("/autoassign") ||
     // request.url.includes("/twilio") ||
     // request.url.includes("/assets") ||
-    request.headers.get("referer") &&
-    request.headers.get("referer").includes("/admin"),
+    (request.headers.get("referer") &&
+      request.headers.get("referer").includes("/admin")),
   respond: request => {
     return proxy(`https://${app.config.adminBackend}`, {
       headers: {
