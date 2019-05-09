@@ -35,6 +35,17 @@ const backends = [admin, texter];
 // const backends = [texter];
 
 fly.http.respondWith(async request => {
+  const { isMaintenanceMode } = app.config;
+  const booleanTrue = isMaintenanceMode && isMaintenanceMode === true;
+  const textTrue = isMaintenanceMode && isMaintenanceMode === "true";
+  if (booleanTrue || textTrue) {
+    return new Response(
+      "<h1>Spoke is down for maintenance at the moment.</h1>",
+      {
+        status: 503
+      }
+    );
+  }
   for (let backend of backends) {
     if (backend.test(request)) {
       // console.log(request.headers.get("referer"));

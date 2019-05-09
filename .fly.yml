@@ -4,3 +4,5 @@ config:
     fromSecret: adminBackend
   texterBackend:
     fromSecret: texterBackend
+  isMaintenanceMode:
+    fromSecret: isMaintenanceMode
