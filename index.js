@@ -31,8 +31,8 @@ const texter = {
   }
 };
 
-const backends = [admin, texter];
-// const backends = [texter];
+// const backends = [admin, texter];
+const backends = [texter];
 
 fly.http.respondWith(async request => {
   const { isMaintenanceMode } = app.config;
