@@ -20,3 +20,5 @@ yarn install
 Rather than running commands such as `fly server`, `fly deploy`, `fly login`, use `yarn fly server`, or `yarn fly x`, to ensure we're running the same fly version as installed by `yarn.lock`.
 
 So `yarn start` or `yarn fly server` will get it going on `localhost:3000`.
+
+To deploy, modify your `.fly.yml` to refer to a unique app. The current one, `spoke-fly`, is owned by us.
