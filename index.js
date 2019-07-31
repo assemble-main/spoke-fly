@@ -7,7 +7,8 @@ const admin = {
     // request.url.includes("/twilio") ||
     // request.url.includes("/assets") ||
     request.headers.get("referer") &&
-    request.headers.get("referer").includes("/admin"),
+    request.headers.get("referer").includes("/admin") &&
+    request.headers.get("referer").includes("/campaigns"),
   respond: request => {
     return proxy(`https://${app.config.adminBackend}`, {
       headers: {
