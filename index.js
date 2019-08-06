@@ -6,9 +6,9 @@ const admin = {
     // request.url.includes("/autoassign") ||
     // request.url.includes("/twilio") ||
     // request.url.includes("/assets") ||
-    request.headers.get("referer") &&
-    request.headers.get("referer").includes("/admin") &&
-    request.headers.get("referer").includes("/campaigns"),
+    (request.headers.get("referer") &&
+      request.headers.get("referer").includes("/admin")) ||
+    Math.random() < 0.25,
   respond: request => {
     return proxy(`https://${app.config.adminBackend}`, {
       headers: {
