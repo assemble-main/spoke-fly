@@ -3,9 +3,6 @@ import proxy from "@fly/fetch/proxy";
 const admin = {
   name: "admin",
   test: request =>
-    // request.url.includes("/autoassign") ||
-    // request.url.includes("/twilio") ||
-    // request.url.includes("/assets") ||
     (request.headers.get("referer") &&
       request.headers.get("referer").includes("/admin")) ||
     Math.random() < 0.25,
@@ -33,7 +30,6 @@ const texter = {
 };
 
 const backends = [admin, texter];
-// const backends = [texter];
 
 fly.http.respondWith(async request => {
   const { isMaintenanceMode } = app.config;
@@ -49,8 +45,6 @@ fly.http.respondWith(async request => {
   }
   for (let backend of backends) {
     if (backend.test(request)) {
-      // console.log(request.headers.get("referer"));
-      // console.log(`Using ${backend.name}`);
       return backend.respond(request);
     }
   }
