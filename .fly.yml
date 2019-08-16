@@ -6,3 +6,5 @@ config:
     fromSecret: texterBackend
   isMaintenanceMode:
     fromSecret: isMaintenanceMode
+  adminTrafficRate:
+    fromSecret: adminTrafficRate

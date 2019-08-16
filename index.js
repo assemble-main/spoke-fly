@@ -1,11 +1,21 @@
 import proxy from "@fly/fetch/proxy";
 
+const adminTrafficRate = parseFloat(app.config.adminTrafficRate || 0.0);
+
 const admin = {
   name: "admin",
-  test: request =>
-    (request.headers.get("referer") &&
-      request.headers.get("referer").includes("/admin")) ||
-    Math.random() < 0.25,
+  test: request => {
+    const referer = request.headers.get("referer");
+    // The adminbackend should handle any asset requests originating from an index served by
+    // adminBackend (Lambda indexes will request from s3) as bundle hash chunks may not match
+    // between EKS and Lambda
+    const isAssetsRequest = request.url.includes("/assets");
+
+    const isAdminRequest = referer && referer.includes("/admin");
+    const isAdminRouted = Math.random() < adminTrafficRate;
+
+    return isAdminRequest || isAssetsRequest || isAdminRouted;
+  },
   respond: request => {
     return proxy(`https://${app.config.adminBackend}`, {
       headers: {
