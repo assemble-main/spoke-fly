@@ -18,7 +18,7 @@ const admin = {
 
 const texter = {
   name: "texter",
-  test: request => true,
+  test: _request => true,
   respond: request => {
     return proxy(`https://${app.config.texterBackend}`, {
       headers: {
