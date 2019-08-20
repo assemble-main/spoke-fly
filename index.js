@@ -11,10 +11,14 @@ const admin = {
     // between EKS and Lambda
     const isAssetsRequest = request.url.includes("/assets");
 
+    const isAutoassignRequest = request.url.includes("/autoassign");
+
     const isAdminRequest = referer && referer.includes("/admin");
     const isAdminRouted = Math.random() < adminTrafficRate;
 
-    return isAdminRequest || isAssetsRequest || isAdminRouted;
+    return (
+      isAutoassignRequest || isAdminRequest || isAssetsRequest || isAdminRouted
+    );
   },
   respond: request => {
     return proxy(`https://${app.config.adminBackend}`, {
