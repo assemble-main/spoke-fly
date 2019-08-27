@@ -1,4 +1,5 @@
 import proxy from "@fly/fetch/proxy";
+import Url from "url-parse";
 
 const adminTrafficRate = parseFloat(app.config.adminTrafficRate || 0.0);
 
@@ -57,6 +58,17 @@ fly.http.respondWith(async request => {
       }
     );
   }
+
+  // Force HTTPS
+  const url = new Url(request.url);
+  if (url.protocol === "http:" && url.hostname !== "localhost") {
+    url.set("protocol", "https:");
+    return new Response("Redirecting", {
+      status: 302,
+      headers: { Location: url.toString() }
+    });
+  }
+
   for (let backend of backends) {
     if (backend.test(request)) {
       return backend.respond(request);
