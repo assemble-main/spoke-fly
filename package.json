@@ -14,6 +14,6 @@
     "@fly/fly": "^0.44.9"
   },
   "dependencies": {
-    "url-parse": "^1.4.7"
+    "url-parse": "^1.5.0"
   }
 }
